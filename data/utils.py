@@ -2,16 +2,17 @@ from evmdasm import EvmBytecode
 import json
 import re
 
+
 def decompile(_bytecode: str):
     disassembler = EvmBytecode(_bytecode)
     opcode = disassembler.disassemble().as_string
-    opcode_normalized = opcode.replace(' \n', '\n').replace(' ', ' 0x')
+    opcode_normalized = opcode.replace(" \n", "\n").replace(" ", " 0x")
     return opcode_normalized.lower()
 
 
 def tokenize_with_hex_replacement(opcode_str):
-    modified_str = re.sub(r'0x[0-9a-fA-F]+', 'HEX_CONST', opcode_str)
-    tokens = re.split(r'\s+', modified_str)
+    modified_str = re.sub(r"0x[0-9a-fA-F]+", "HEX_CONST", opcode_str)
+    tokens = re.split(r"\s+", modified_str)
     return tokens
 
 
